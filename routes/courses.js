@@ -2,6 +2,8 @@ const { Router } = require("express");
 const router = Router();
 const Course = require("../models/course");
 const auth = require("../middleware/auth");
+const { validationResult } = require("express-validator");
+const { courseValidators } = require("../utils/validators");
 
 function isOwner(course, req) {
   return course.userId.toString() === req.user._id.toString();
@@ -61,7 +63,12 @@ router.post("/edit", auth, async (req, res) => {
     if (!isOwner(course, req)) {
       res.redirect("/courses");
     }
+    const errors = validationResult(req);
     const { id } = req.body;
+
+    if (!errors.isEmpty()) {
+      return res.status(422).redirect(`/course/${id}/edit?allow=true`);
+    }
     delete req.body.id;
     const course = await Course.findById(req.params.id).lean();
     if (!isOwner(course, req)) {
