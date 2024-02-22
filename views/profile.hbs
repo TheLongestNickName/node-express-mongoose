@@ -1,0 +1,44 @@
+<h1>Profile</h1>
+
+<div class="row">
+  <div class="col s6">
+    <img
+      class="avatar"
+      src="https://miro.medium.com/v2/resize:fit:500/0*xkJgg-6HskYrQ3N7.jpeg"
+      alt=""
+    />
+    <p>No avatar</p>
+  </div>
+  <div class="col s6">
+    <form action="/profile" method="post">
+      <p>Your emal <strong>{{user.email}}</strong></p>
+
+      <div class="input-field">
+        <input
+          name="name"
+          id="name"
+          type="text"
+          class="validate"
+          value="{{user.name}}"
+        />
+        <label for="name">Your name</label>
+        <span class="helper-text" data-error="Name musn't be empty">Enter name</span>
+      </div>
+
+      <div class="file-field input-field">
+        <div class="btn">
+          <span>Avatar</span>
+          <input type="file" name="avatar" />
+        </div>
+        <div class="file-path-wrapper">
+          <input class="file-path validate" type="text" />
+        </div>
+      </div>
+
+      <input type="hidden" name="_csrf" value="{{csrf}}" />
+
+      <button class="btn btn-succes" type="submit">Change</button>
+
+    </form>
+  </div>
+</div>

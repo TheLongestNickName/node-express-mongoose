@@ -12,6 +12,7 @@ const courseRouters = require("./routes/courses");
 const cardRouters = require("./routes/card");
 const AuthRouters = require("./routes/auth");
 const ordersRouters = require("./routes/orders");
+const profileRouters = require("./routes/profile");
 const app = express();
 const varMiddleware = require("./middleware/variables");
 const errorHandler = require("./middleware/error");
@@ -62,6 +63,7 @@ app.use("/courses", courseRouters);
 app.use("/card", cardRouters);
 app.use("/orders", ordersRouters);
 app.use("/auth", AuthRouters);
+app.use("/profile", profileRouters);
 
 app.use(errorHandler);
 
