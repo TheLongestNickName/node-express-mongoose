@@ -20,6 +20,7 @@ const keys = require("./keys");
 const hbs = exphbs.create({
   defaultLayout: "main",
   extname: "hbs",
+  helpers: require("./utils/hbs.helpres"),
   runtimeOptions: {
     allowProtoPropertiesByDefault: true,
     allowProtoMethodsByDefault: true,
@@ -67,16 +68,6 @@ async function start() {
   try {
     await mongoose.connect(keys.MONGODB_URI);
 
-    // const candidate = await User.findOne();
-    // if (!candidate) {
-    //   const user = new User({
-    //     email: "apc7@ukr.net",
-    //     name: "Sergey",
-    //     card: { items: [] },
-    //   });
-    //   await user.save();
-    // }
-
     app.listen(PORT, () => {
       console.log(`Server has been ran on port ${PORT} `);
     });
@@ -86,7 +77,3 @@ async function start() {
 }
 
 start();
-
-const password = "DSmyJHjEmJT597s3";
-const user = "apc71405";
-const ip = "46.98.106.219/32";
