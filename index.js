@@ -17,6 +17,7 @@ const app = express();
 const varMiddleware = require("./middleware/variables");
 const errorHandler = require("./middleware/error");
 const userMiddleware = require("./middleware/user");
+const fileMiddleware = require("./middleware/file");
 const keys = require("./keys");
 
 const hbs = exphbs.create({
@@ -39,6 +40,7 @@ app.set("view engine", "hbs"); // Здесь уже его используем
 app.set("views", "views");
 
 app.use(express.static(path.join(__dirname, "public")));
+app.use("/images", express.static(path.join(__dirname, "images")));
 app.use(
   express.urlencoded({
     extended: true,
@@ -52,6 +54,7 @@ app.use(
     store,
   })
 );
+app.use(fileMiddleware.single("avatar"));
 app.use(csrf());
 app.use(flash());
 app.use(varMiddleware);
